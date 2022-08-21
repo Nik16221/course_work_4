@@ -1,6 +1,0 @@
-venv/
-.idea/
-.*_cache/
-__pycache__
-*.db
-.coverage
