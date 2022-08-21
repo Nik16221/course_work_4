@@ -8,14 +8,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 class BaseConfig:
     SECRET_KEY = os.getenv('SECRET_KEY', 'you-will-never-guess')
+    ALGORITHM = "HS256"
     JSON_AS_ASCII = False
 
     ITEMS_PER_PAGE = 12
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    TOKEN_EXPIRE_MINUTES = 15
-    TOKEN_EXPIRE_DAYS = 130
+    TOKEN_EXPIRE_MINUTES = 30
+    TOKEN_EXPIRE_DAY = 1440
 
     PWD_HASH_SALT = base64.b64decode("salt")
     PWD_HASH_ITERATIONS = 100_000
@@ -42,7 +43,7 @@ class ProductionConfig(BaseConfig):
 
 
 class ConfigFactory:
-    flask_env = os.getenv('FLASK_ENV')
+    flask_env = os.getenv('FLASK_ENV', 'development')
 
     @classmethod
     def get_config(cls) -> Type[BaseConfig]:
